@@ -25,6 +25,54 @@ public class Community {
     @Column(name = "bCode")
 	private long bcode;
 	
+	public long getBcode() {
+		return bcode;
+	}
+
+	public void setBcode(long bcode) {
+		this.bcode = bcode;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public int getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
+
+	public Long getuCode() {
+		return uCode;
+	}
+
+	public void setuCode(Long uCode) {
+		this.uCode = uCode;
+	}
+
 	@Column
 	private String title;
 
@@ -37,7 +85,7 @@ public class Community {
 	@Column
 	private int recommend;
 	
-	@Column(name = "uCode")
+	@Column
 	private Long uCode;
 	
 }

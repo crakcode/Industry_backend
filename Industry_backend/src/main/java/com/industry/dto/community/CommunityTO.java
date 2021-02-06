@@ -10,22 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class CommunityTO {
 	
 	private String title;
-
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	private String content;
-	
 	private Date date;
-	
 	private int recommend;
-	
 	private Long uCode;
 	
 }
