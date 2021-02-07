@@ -37,12 +37,17 @@ public class CommunityCtrl {
     }
     
     
+    @PutMapping("/{bcode}")
+    public ResponseEntity<Community> updateCommunity(@PathVariable Long bcode,@RequestBody Community Community){
+    	return communityservice.updateCommunity(bcode,Community);
+    }
+
 //    @PutMapping("/{categoryId}/{key}")
 //    public void updateSystemCode(@PathVariable String categoryId, @PathVariable String key, @RequestBody CodeTO codeTO) {
 //        domainServ.save(codeTO);
 //    }
-//    @DeleteMapping("/{categoryId}/{key}")
-//    public void deleteSystemCode(@PathVariable String categoryId, @PathVariable String key) {
-//        domainServ.delete(new SystemCode.Key(categoryId, key));
-//    }
+    @DeleteMapping("/{bcode}")
+    public void deleteCommunity(@PathVariable Long bcode) {
+    	communityservice.deleteCommunity(bcode);
+    }
 }
