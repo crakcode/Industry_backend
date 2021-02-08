@@ -13,6 +13,7 @@ import com.industry.dao.community.CommunityService;
 import com.industry.dao.company.CompanyService;
 import com.industry.dao.user.UserService;
 import com.industry.dto.community.CommunityTO;
+import com.industry.dto.company.CompanyTO;
 import com.industry.entity.Community;
 import com.industry.entity.Company;
 import com.industry.entity.User;
@@ -35,7 +36,18 @@ public class CompanyCtrl {
         return companyServ.getByCompanylocation(location);
     }
     
-    
+    @GetMapping("/name/{name}")
+    public List<Company> getByCompanyName(@PathVariable String name) {
+        return companyServ.getByCompanyName(name);
+    }
+
+    @GetMapping("/search")
+    public List<Company> getByDyanamicKeyword(@RequestBody CompanyTO companyTO) {
+    	companyTO.getLocation();
+    	System.out.println(companyTO.getName());
+        return companyServ.getByDyanamicKeyword(companyTO);
+    }
+
 //    @PostMapping("")
 //    public void createSystemCode(@RequestBody User user) {
 //    	userServ.createUser(user);

@@ -13,4 +13,8 @@ import com.industry.entity.Company;
 public interface CompanyRepository extends JpaRepository<Company, Long>{
 
 	List<Company> findByCompanyLocationContaining(String location);
+
+	List<Company> findByCompanyNameContaining(String name);
+	
+
 }
