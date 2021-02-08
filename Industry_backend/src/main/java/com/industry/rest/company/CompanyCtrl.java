@@ -1,4 +1,4 @@
-package com.industry.rest.user;
+package com.industry.rest.company;
 
 import lombok.RequiredArgsConstructor;
 
@@ -10,41 +10,49 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.industry.dao.community.CommunityService;
+import com.industry.dao.company.CompanyService;
 import com.industry.dao.user.UserService;
 import com.industry.dto.community.CommunityTO;
 import com.industry.entity.Community;
+import com.industry.entity.Company;
 import com.industry.entity.User;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/user")
-public class UserCtrl {
+@RequestMapping("/api/v1/company")
+public class CompanyCtrl {
 	
 	@Autowired
-    private UserService userServ;
+    private CompanyService companyServ;
 
     @GetMapping("/list")
-    public List<User> getAllUsers() {
-        return userServ.getAllUsers();
+    public List<Company> getAllUsers() {
+        return companyServ.getAllCompany();
     }
 
-    @PostMapping("")
-    public void createSystemCode(@RequestBody User user) {
-    	userServ.createUser(user);
+    @GetMapping("/{location}")
+    public List<Company> getByCompanylocation(@PathVariable String location) {
+        return companyServ.getByCompanylocation(location);
     }
-
-    @PostMapping("/{ucode}")
-    public ResponseEntity<User> getCommunityById(@PathVariable Long ucode){
-    	System.out.println(ucode);
-    	return userServ.getUserById(ucode);
-    }
-
-
-    @PostMapping("/login")
-    public boolean login(User user){
-    	System.out.println(user.getEmail());
-    	return userServ.login(user);
-    }
+    
+    
+//    @PostMapping("")
+//    public void createSystemCode(@RequestBody User user) {
+//    	userServ.createUser(user);
+//    }
+//
+//    @PostMapping("/{ucode}")
+//    public ResponseEntity<User> getCommunityById(@PathVariable Long ucode){
+//    	System.out.println(ucode);
+//    	return userServ.getUserById(ucode);
+//    }
+//
+//
+//    @PostMapping("/login")
+//    public boolean login(User user){
+//    	System.out.println(user.getEmail());
+//    	return userServ.login(user);
+//    }
     
 //    @PutMapping("/{categoryId}/{key}")
 //    public void updateSystemCode(@PathVariable String categoryId, @PathVariable String key, @RequestBody CodeTO codeTO) {
