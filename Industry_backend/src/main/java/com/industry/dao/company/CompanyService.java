@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.industry.dto.community.CommunityTO;
+import com.industry.dto.company.CompanyTO;
 import com.industry.entity.Community;
 import com.industry.entity.Company;
 import com.industry.service.community.CommunityRepository;
@@ -39,10 +40,28 @@ public class CompanyService {
 	}
 
 	public List<Company> getByCompanylocation(String location){
-		System.out.println(companyResp.findByCompanyLocationContaining(location).size());
 		return companyResp.findByCompanyLocationContaining(location);
 	}
 
+	
+	public List<Company> getByCompanyName(String name){
+		System.out.println(name);
+		return companyResp.findByCompanyNameContaining(name);
+	}
+
+	public List<Company> getByDyanamicKeyword(CompanyTO companyTO){
+		if (companyTO==null){
+			List<Company> li=null;
+			return li;
+		}
+		if (companyTO.getLocation()!=null) {
+			return companyResp.findByCompanyLocationContaining(companyTO.getLocation());
+		}
+		else {
+			return companyResp.findByCompanyNameContaining(companyTO.getName());
+		}
+	
+	}
 	
 	
 //	// insert coulmn into coummunity table using post

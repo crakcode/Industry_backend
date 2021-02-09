@@ -59,6 +59,22 @@ public class Company {
 	@Column
 	private String companyLocation;
 	
+	public long getCompanyId() {
+		return companyId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public String getCompanyLocation() {
+		return companyLocation;
+	}
+
+	public String getCompanyTel() {
+		return companyTel;
+	}
+
 	@Column
 	private String companyTel;
 	
