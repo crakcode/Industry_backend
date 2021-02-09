@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.industry.dto.community.CommunityTO;
 import com.industry.entity.Community;
 import com.industry.service.community.CommunityRepository;
-import com.industry.springboot.exception.ResourceNotFoundException;
+import com.industry.common.ResourceNotFoundException;
 import com.industry.springboot.model.Employee;
 
 import lombok.RequiredArgsConstructor;

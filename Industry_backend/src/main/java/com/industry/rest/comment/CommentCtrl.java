@@ -23,7 +23,6 @@ import com.industry.entity.User;
 import com.industry.service.comment.CommentRepository;
 import com.industry.service.post.PostRepository;
 import com.industry.service.user.UserRepository;
-import com.industry.springboot.exception.ResourceNotFoundException;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/post")

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.industry.dao.community.CommunityService;
 import com.industry.entity.Community;
-import com.industry.springboot.exception.ResourceNotFoundException;
+import com.industry.common.ResourceNotFoundException;
 import com.industry.springboot.model.Employee;
 import com.industry.springboot.repository.EmployeeRepository;
 @CrossOrigin(origins = "http://localhost:3000")

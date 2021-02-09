@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.industry.entity.User;
 import com.industry.service.user.UserRepository;
-import com.industry.springboot.exception.ResourceNotFoundException;
+import com.industry.common.ResourceNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
