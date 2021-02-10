@@ -17,7 +17,7 @@ import com.industry.entity.Post;
 import com.industry.service.community.CommunityRepository;
 import com.industry.service.post.PostRepository;
 import com.industry.service.user.UserRepository;
-import com.industry.springboot.exception.ResourceNotFoundException;
+import com.industry.common.ResourceNotFoundException;
 import com.industry.springboot.model.Employee;
 
 import lombok.RequiredArgsConstructor;

@@ -61,4 +61,14 @@ public class Post {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Date createAt;
 }

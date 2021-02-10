@@ -44,7 +44,7 @@ public class CommentCtrl {
 	// 1. 특정 게시글에 있는 comment를 불러온다.
 	// param: id(Post id)
 	
-	@GetMapping("/{id}/comment")
+	@GetMapping("/comment/{id}")
 	public List<Comment> getPostComments(@PathVariable Long id){
 		return commentServ.getPostComments(id);
 	}
