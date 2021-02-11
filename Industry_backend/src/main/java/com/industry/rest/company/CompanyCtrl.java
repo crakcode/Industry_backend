@@ -30,6 +30,11 @@ public class CompanyCtrl {
     public List<Company> getAllUsers() {
         return companyServ.getAllCompany();
     }
+    
+    @GetMapping("/count")
+    public List<Integer> getByCompanyCount() {
+        return companyServ.getByCompanyCount();
+    }
 
     @GetMapping("/{location}")
     public List<Company> getByCompanylocation(@PathVariable String location) {

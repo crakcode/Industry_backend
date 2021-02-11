@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.industry.dto.community.CommunityTO;
 import com.industry.entity.Community;
 import com.industry.entity.Post;
+import com.industry.entity.User;
 import com.industry.service.community.CommunityRepository;
 import com.industry.service.post.PostRepository;
 import com.industry.service.user.UserRepository;
@@ -42,6 +43,10 @@ public class PostService {
 		return postResp.findAll();
 	}
 
+	public List<Post> getPostByWriter(String writer){
+		return postResp.findByWriter(writer);
+	}
+	
 	// insert coulmn into coummunity table using post
 	public void createPost(Post post,Long ucode) {
 		post.setWriter(userResp.findById(ucode).get().getName());

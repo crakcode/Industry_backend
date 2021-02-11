@@ -28,6 +28,11 @@ public class PostCtrl {
 		  return postServ.getAllPost();
 	  }
 //
+	  @GetMapping("/writer/{writer}")
+	  public List<Post> getPostByWriter(@PathVariable String writer){
+		  	return postServ.getPostByWriter(writer);
+	  }
+	  
 	  @PostMapping("/{ucode}")
 	  public void createPost(@RequestBody Post post,@PathVariable Long ucode) {
 	  	postServ.createPost(post,ucode);

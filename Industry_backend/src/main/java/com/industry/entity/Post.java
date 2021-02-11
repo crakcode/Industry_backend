@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -26,10 +28,22 @@ public class Post {
 	
 	private String title;
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	private String content;
 	
 	private String writer;
 
+	@ManyToOne
+	@JoinColumn(name = "email")
+	private User user;	
+	
 	public Long getId() {
 		return Id;
 	}

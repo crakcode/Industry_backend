@@ -22,6 +22,7 @@ import com.industry.springboot.model.Employee;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,14 +39,29 @@ public class CompanyService {
 	public List<Company> getAllCompany(){
 		return companyResp.findAll();
 	}
+	
+	//서울 경기도, 부산, 대구 광주
+	public List<Integer> getByCompanyCount(){
+		List<String> li=new ArrayList();
+		li.add("서울");
+		li.add("경기도");
+		li.add("강원도");
+		li.add("충청북도");
+		li.add("충청남도");
+		List<Integer> num = new ArrayList<Integer>();
+		for(int i=0;i<li.size();i++) {
+			num.add(companyResp.findByCompanyLocationContaining(li.get(i)).size());
+		}
+		return num;
+	}
 
+	
 	public List<Company> getByCompanylocation(String location){
 		return companyResp.findByCompanyLocationContaining(location);
 	}
 
 	
 	public List<Company> getByCompanyName(String name){
-		System.out.println(name);
 		return companyResp.findByCompanyNameContaining(name);
 	}
 
