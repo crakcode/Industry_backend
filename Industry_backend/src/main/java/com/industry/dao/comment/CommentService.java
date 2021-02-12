@@ -58,7 +58,6 @@ public class CommentService {
 		commentTO.setPost(postItem.get());
 		commentTO.setUser(userItem.get());
 		commentTO.setWriter(userItem.get().getName());
-//		commentTO.setId((long) (commentRepository.findAll().size()+1));
 		commentRepository.save(commentTO);
 		return commentTO;
 	}

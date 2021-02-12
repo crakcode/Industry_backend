@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.industry.dto.community.CommunityTO;
 import com.industry.dto.company.CompanyTO;
+import com.industry.entity.CheckCompany;
+import com.industry.entity.Comment;
 import com.industry.entity.Community;
 import com.industry.entity.Company;
+import com.industry.entity.Post;
+import com.industry.entity.User;
+import com.industry.service.checkcompany.CheckCompanyRepository;
 import com.industry.service.community.CommunityRepository;
 import com.industry.service.company.CompanyRepository;
+import com.industry.service.user.UserRepository;
 import com.industry.common.ResourceNotFoundException;
 import com.industry.springboot.model.Employee;
 
@@ -26,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,10 +41,21 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository companyResp;
 
+	@Autowired
+	private UserRepository userResp;
+	
+	@Autowired
+	private CheckCompanyRepository checkResp;
 	
 	// get all community
 	public List<Company> getAllCompany(){
 		return companyResp.findAll();
+	}
+	
+	
+	public Long getCompanyId(String name) {
+		Optional<Company> company=companyResp.findByCompanyName(name);
+		return company.get().getCompanyId();
 	}
 	
 	//서울 경기도, 부산, 대구 광주
@@ -55,6 +73,33 @@ public class CompanyService {
 		return num;
 	}
 
+	public List<Company> createCompanyByUcode(Long ucode) {
+		List<Company> li=new ArrayList<Company>();
+		for(int i=0;i<userResp.findById(ucode).get().getCheckcompanys().size();i++) {
+			li.add(userResp.findById(ucode).get().getCheckcompanys().get(i).getCompany());
+		}
+		return li;
+	}
+	
+	public void crateMyCompany(Long ucode,String name) {
+		CheckCompany checkCompany=new CheckCompany();
+		User user=userResp.findById(ucode).get();
+		Optional<Company> company=companyResp.findByCompanyName(name);
+		checkCompany.setCompany(company.get());
+		checkCompany.setUser(user);
+		checkResp.save(checkCompany);
+	}
+	
+	public void deleteMyCompany(Long ucode,Long companyId){
+//		CheckCompany checkCompany=new CheckCompany();
+		User user=userResp.findById(ucode).get();
+//		Optional<Company> company=companyResp.findByCompanyName(name);
+		List<CheckCompany> checkCompany =checkResp.findByCompanyIdAndUcode(ucode,companyId);
+		for(int i=0;i<checkCompany.size();i++) {
+			CheckCompany checkCompany1=checkCompany.get(i);
+			checkResp.delete(checkCompany1);
+		}
+	}
 	
 	public List<Company> getByCompanylocation(String location){
 		return companyResp.findByCompanyLocationContaining(location);
@@ -78,6 +123,7 @@ public class CompanyService {
 		}
 	
 	}
+
 	
 	
 //	// insert coulmn into coummunity table using post

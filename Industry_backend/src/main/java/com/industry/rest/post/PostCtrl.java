@@ -28,9 +28,9 @@ public class PostCtrl {
 		  return postServ.getAllPost();
 	  }
 //
-	  @GetMapping("/writer/{writer}")
-	  public List<Post> getPostByWriter(@PathVariable String writer){
-		  	return postServ.getPostByWriter(writer);
+	  @GetMapping("/writer/{ucode}")
+	  public List<Post> getPostByWriter(@PathVariable Long ucode){
+		  	return postServ.getPostByWriter(ucode);
 	  }
 	  
 	  @PostMapping("/{ucode}")

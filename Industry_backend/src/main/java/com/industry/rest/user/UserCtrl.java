@@ -10,9 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.industry.dao.community.CommunityService;
+import com.industry.dao.company.CompanyService;
 import com.industry.dao.user.UserService;
 import com.industry.dto.community.CommunityTO;
+import com.industry.entity.CheckCompany;
 import com.industry.entity.Community;
+import com.industry.entity.Company;
 import com.industry.entity.User;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -22,10 +25,18 @@ public class UserCtrl {
 	
 	@Autowired
     private UserService userServ;
+	
+	@Autowired
+    private CompanyService companyServ;
 
     @GetMapping("/list")
     public List<User> getAllUsers() {
         return userServ.getAllUsers();
+    }
+    
+    @GetMapping("/company/{ucode}")
+    public  List<Company> createCompanyByUcode(@PathVariable Long ucode) {
+        return companyServ.createCompanyByUcode(ucode);
     }
 
     @PostMapping("")
@@ -39,6 +50,10 @@ public class UserCtrl {
     	return userServ.getUserById(ucode);
     }
 
+    @PostMapping("/{ucode}/{name}")
+    public void crateMyCompany(@PathVariable Long ucode,@PathVariable String name){
+    	companyServ.crateMyCompany(ucode,name);
+    }
 
     @PostMapping("/login")
     public boolean login(User user){

@@ -43,7 +43,10 @@ public class PostService {
 		return postResp.findAll();
 	}
 
-	public List<Post> getPostByWriter(String writer){
+	public List<Post> getPostByWriter(Long ucode){
+		User user=userResp.findById(ucode)
+				.orElseThrow(() -> new ResourceNotFoundException("post not exist with id :" + ucode));
+		String writer=user.getName();
 		return postResp.findByWriter(writer);
 	}
 	
