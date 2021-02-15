@@ -68,8 +68,8 @@ public class CommentCtrl {
  }
 
  
-	@DeleteMapping("/{id}/comment/{commentID}")
-	public String deleteComment(@PathVariable Long id, @PathVariable Long commentID){
-		return commentServ.deleteComment(id,commentID);
+	@DeleteMapping("/comment/{ucode}/{commentID}")
+	public boolean deleteComment(@PathVariable Long ucode, @PathVariable Long commentID){
+		return commentServ.deleteComment(ucode,commentID);
 	}
  }
