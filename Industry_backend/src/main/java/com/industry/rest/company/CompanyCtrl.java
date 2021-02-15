@@ -14,6 +14,7 @@ import com.industry.dao.company.CompanyService;
 import com.industry.dao.user.UserService;
 import com.industry.dto.community.CommunityTO;
 import com.industry.dto.company.CompanyTO;
+import com.industry.entity.CheckCompany;
 import com.industry.entity.Community;
 import com.industry.entity.Company;
 import com.industry.entity.User;
@@ -29,6 +30,16 @@ public class CompanyCtrl {
     @GetMapping("/list")
     public List<Company> getAllUsers() {
         return companyServ.getAllCompany();
+    }
+    
+    @GetMapping("/count")
+    public List<Integer> getByCompanyCount() {
+        return companyServ.getByCompanyCount();
+    }
+    
+    @GetMapping("/id/{name}")
+    public Long getCompanyId(@PathVariable String name) {
+        return companyServ.getCompanyId(name);
     }
 
     @GetMapping("/{location}")
@@ -48,9 +59,9 @@ public class CompanyCtrl {
         return companyServ.getByDyanamicKeyword(companyTO);
     }
 
-//    @PostMapping("")
-//    public void createSystemCode(@RequestBody User user) {
-//    	userServ.createUser(user);
+//    @PostMapping("/{ucode}/{companyId}")
+//    public void createCompanyByUcode(@PathVariable Long ucode,@PathVariable Long companyId) {
+//    	companyServ.createCompanyByUcode(ucode,companyId);
 //    }
 //
 //    @PostMapping("/{ucode}")
@@ -70,8 +81,8 @@ public class CompanyCtrl {
 //    public void updateSystemCode(@PathVariable String categoryId, @PathVariable String key, @RequestBody CodeTO codeTO) {
 //        domainServ.save(codeTO);
 //    }
-//    @DeleteMapping("/{categoryId}/{key}")
-//    public void deleteSystemCode(@PathVariable String categoryId, @PathVariable String key) {
-//        domainServ.delete(new SystemCode.Key(categoryId, key));
-//    }
+    @DeleteMapping("/{ucode}/{companyId}")
+    public void deleteMyCompany(@PathVariable Long ucode, @PathVariable("companyId") Long companyId){
+    	companyServ.deleteMyCompany(ucode, companyId);
+    }
 }

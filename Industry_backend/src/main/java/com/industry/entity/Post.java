@@ -34,7 +34,7 @@ public class Post {
 
 	
 	@ManyToOne
-	@JoinColumn(name = "uCode")
+	@JoinColumn(name = "email")
 	private User user;
 	
 	public Long getId() {
@@ -69,17 +69,21 @@ public class Post {
 		this.writer = writer;
 	}
 
-	/**
-	 * @return the user
-	 */
 	public User getUser() {
 		return user;
 	}
 
-	/**
-	 * @param user the user to set
-	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Date createAt;
 }

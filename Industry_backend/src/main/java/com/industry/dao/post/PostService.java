@@ -42,16 +42,17 @@ public class PostService {
 	public List<Post> getAllPost(){
 		return postResp.findAll();
 	}
-	
+
+	public List<Post> getPostByWriter(Long ucode){
+		User user=userResp.findById(ucode)
+				.orElseThrow(() -> new ResourceNotFoundException("post not exist with id :" + ucode));
+		String writer=user.getName();
+		return postResp.findByWriter(writer);
+	}
 	
 	// insert coulmn into coummunity table using post
 	public void createPost(Post post,Long ucode) {
 		post.setWriter(userResp.findById(ucode).get().getName());
-		User user=userResp.findById(ucode)
-				.orElseThrow(() -> new ResourceNotFoundException("post not exist with id :" + ucode));
-		System.out.println(postResp.count()+1);
-		post.setId((long) postResp.count()+1);
-		post.setUser(user);
 		postResp.save(post);
 	}
 

@@ -26,29 +26,24 @@ public class UserCtrl {
 	
 	@Autowired
     private UserService userServ;
-
-	@Autowired
-	private UserRepository userReps;
 	
+	@Autowired
+    private CompanyService companyServ;
+
     @GetMapping("/list")
     public List<User> getAllUsers() {
         return userServ.getAllUsers();
     }
-
-    @PostMapping("")
-    public void findModelMapper(@RequestBody UserTO userTO) {
-    	ModelMapper modelMapper = new ModelMapper();
-    	User user = userReps.findById(userTO.getUcode())
-    			.orElseGet(User::new);
-    	modelMapper.map(userTO,user);
-    	userReps.save(user);
+    
+    @GetMapping("/company/{ucode}")
+    public  List<Company> createCompanyByUcode(@PathVariable Long ucode) {
+        return companyServ.createCompanyByUcode(ucode);
     }
 
-    // 기존의 Entity 저장 로직
-//    @PostMapping("")
-//    public void createSystemCode(@RequestBody User user) {
-//    	userServ.createUser(user);
-//    }
+    @PostMapping("")
+    public void createSystemCode(@RequestBody User user) {
+    	userServ.createUser(user);
+    }
 
     @PostMapping("/{ucode}")
     public ResponseEntity<User> getCommunityById(@PathVariable Long ucode){
@@ -56,15 +51,16 @@ public class UserCtrl {
     	return userServ.getUserById(ucode);
     }
 
+    @PostMapping("/{ucode}/{name}")
+    public void crateMyCompany(@PathVariable Long ucode,@PathVariable String name){
+    	companyServ.crateMyCompany(ucode,name);
+    }
 
     @PostMapping("/login")
     public boolean login(User user){
     	System.out.println(user.getEmail());
     	return userServ.login(user);
     }
-    
-    // writer로 
-    
     
 //    @PutMapping("/{categoryId}/{key}")
 //    public void updateSystemCode(@PathVariable String categoryId, @PathVariable String key, @RequestBody CodeTO codeTO) {
