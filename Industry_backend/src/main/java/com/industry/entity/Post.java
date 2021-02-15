@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +32,11 @@ public class Post {
 	
 	private String writer;
 
+	
+	@ManyToOne
+	@JoinColumn(name = "uCode")
+	private User user;
+	
 	public Long getId() {
 		return Id;
 	}
@@ -60,5 +67,19 @@ public class Post {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
