@@ -28,21 +28,14 @@ public class Post {
 	
 	private String title;
 	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	private String content;
 	
 	private String writer;
 
+	
 	@ManyToOne
 	@JoinColumn(name = "email")
-	private User user;	
+	private User user;
 	
 	public Long getId() {
 		return Id;
@@ -74,6 +67,14 @@ public class Post {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public Date getCreateAt() {

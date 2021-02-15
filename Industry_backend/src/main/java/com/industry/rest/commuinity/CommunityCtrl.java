@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import com.industry.dao.community.CommunityService;
 import com.industry.dto.community.CommunityTO;
 import com.industry.entity.Community;
-
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/community")

@@ -27,7 +27,9 @@ public class PostCtrl {
 	  public List<Post> getAllPost(){
 		  return postServ.getAllPost();
 	  }
-//
+
+	  
+	  //post할떄 id값을 post의 id값을 자동생성하여 uCode와 함께 보내어 계산한다.
 	  @GetMapping("/writer/{ucode}")
 	  public List<Post> getPostByWriter(@PathVariable Long ucode){
 		  	return postServ.getPostByWriter(ucode);
