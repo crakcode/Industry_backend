@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 import com.industry.common.ResourceNotFoundException;
 import com.industry.dao.community.CommunityService;
+import com.industry.dao.company.CompanyService;
 import com.industry.dao.user.UserService;
 import com.industry.dto.community.CommunityTO;
 import com.industry.dto.user.UserTO;
 import com.industry.entity.Community;
+import com.industry.entity.Company;
 import com.industry.entity.User;
 import com.industry.service.user.UserRepository;
 
