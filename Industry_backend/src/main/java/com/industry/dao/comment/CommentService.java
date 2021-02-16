@@ -70,9 +70,13 @@ public class CommentService {
 //		newComment.setWriter(newComment.getUser().getName());
 //		return newComment;
 // }
-	public String deleteComment(Long id,Long commentID){
-		commentRepository.deleteById(commentID);
-		return "Comment Delete Success!";
+	public boolean deleteComment(Long ucode,Long commentID){
+		if(ucode==commentRepository.findById(commentID).get().getUser().getUcode()) {
+			commentRepository.deleteById(commentID);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }
