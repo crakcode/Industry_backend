@@ -44,7 +44,7 @@ public class CompanyCtrl {
         return companyServ.getByCompanyCount();
     }
     
-    @GetMapping("/company/location")
+    @PostMapping("/location")
 	public Map<String,Integer> geCompanyCountByList(@RequestBody List<String> list){
 		return companyServ.geCompanyCountByList(list);
     }
