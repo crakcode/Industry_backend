@@ -46,7 +46,6 @@ public class UserService {
 	public boolean login(User user) {
 		User user1=userResp.findByEmail(user.getEmail())
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + user));
-	
 		if (user1.getPassword()==user.getPassword()) {
 			return true;
 		}

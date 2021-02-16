@@ -2,6 +2,8 @@ package com.industry.dao.company;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -52,6 +54,13 @@ public class CompanyService {
 		return companyResp.findAll();
 	}
 	
+	// PageRequest.of(page, size, sort)
+	//userRepository.findByName(PageRequest.of(1, 2, Direction.DESC, "userId"));
+	public Page<Company> getPage(int index){
+		return companyResp.findAll(PageRequest.of(index, 10));
+	}
+	
+
 	
 	public Long getCompanyId(String name) {
 		Optional<Company> company=companyResp.findByCompanyName(name);
@@ -73,6 +82,16 @@ public class CompanyService {
 		return num;
 	}
 
+	public Map<String,Integer> geCompanyCountByList(List<String> list){
+		Map<String,Integer> li=new HashMap();
+		for(int i=0;i<list.size();i++) {
+			li.put(list.get(i), companyResp.findByCompanyLocationContaining(list.get(i)).size());		
+		}
+		return li;
+	}
+	
+	
+	
 	public List<Company> createCompanyByUcode(Long ucode) {
 		List<Company> li=new ArrayList<Company>();
 		for(int i=0;i<userResp.findById(ucode).get().getCheckcompanys().size();i++) {

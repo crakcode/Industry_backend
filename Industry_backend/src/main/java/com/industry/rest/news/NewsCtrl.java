@@ -1,9 +1,8 @@
-package com.industry.rest.crawling;
+package com.industry.rest.news;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,14 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.code.geocoder.Geocoder;
-import com.google.code.geocoder.GeocoderRequestBuilder;
-import com.google.code.geocoder.model.GeocodeResponse;
-import com.google.code.geocoder.model.GeocoderRequest;
-import com.google.code.geocoder.model.GeocoderResult;
-import com.google.code.geocoder.model.GeocoderStatus;
-import com.google.code.geocoder.model.LatLng;
-import com.industry.common.CommonUtil;
 import com.industry.entity.Company;
 import com.industry.service.company.CompanyRepository;
 
@@ -32,8 +23,8 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/crawling")
-public class CrawllingCtrl {
+@RequestMapping("/api/v1/news")
+public class NewsCtrl {
 	
 	@Autowired
 	private CompanyRepository companyResp;
@@ -43,7 +34,7 @@ public class CrawllingCtrl {
 	
 	
     @GetMapping("")
-    public List<String> getComapnyListandRank() {
+    public List<String> getNews() {
 		
 		List<String> map=new ArrayList();
 		System.out.println("hell");
@@ -62,16 +53,12 @@ public class CrawllingCtrl {
     
     
     //되도록이면 쓰지말것
-    //4~5 Diamond
-    //3~4 platinum
-    //2~3 gold
-    //1~2 Silver
-    //0= unrank
-
+    
     @GetMapping("/list")
     public HashMap<String,String> getCompanyRank() {
     	List<String> map=new ArrayList();
     	//검색 전처리 과정 필요한 데이터만 남기기 
+    	
     	HashMap<String,String> hash = new HashMap<>();//new에서 타입 파라미터 생략가능
     	for(int i=0;i<companyResp.findAll().size();i++) {
             String company=companyResp.findAll().get(i).getCompanyName();
@@ -81,30 +68,15 @@ public class CrawllingCtrl {
     	System.out.println(map);
     	System.out.println(map.size());
     	System.out.println(map.get(1));
-    	for(int a=0;a<10;a++) {
+    	for(int a=0;a<map.size();a++) {
     		try{
     			Document doc = Jsoup.connect("https://www.teamblind.com/kr/company/"+map.get(a)).get();
         		Elements divs =doc.select(".star");
-//        		hash.put(map.get(a),divs.get(0).text());
-        		//score는 doc.star에 해당하는 값들을 가져와서 비교하면됨 
-        		Long score=Long.parseLong(divs.get(0).text()); 
-        		String key="";
-        		if(score>4) {
-        			key="Diamond";
-        		}else if(score >3) {
-        			key="Platinum";
-        		}else if(score>2) {
-        			key="Gold";
-        		}else if(score>1) {
-        			key="Silver";
-        		}else {
-        			key="UnRank";
-        		}
-//        		System.out.println(divs.get(0).text());
-    			hash.put(map.get(a),key);
+        		hash.put(map.get(a),divs.get(0).text());
+        		System.out.println(divs.get(0).text());
     		}
     		catch(Exception e) {
-    			hash.put(map.get(a),"UnRank");
+    			hash.put(map.get(a),"없음");
     		}
     	}
     	return hash;
@@ -135,15 +107,4 @@ public class CrawllingCtrl {
     	}
         return map;
     }
-    
-    @GetMapping("/latitude")
-    public Map<String,String> getLatitude(){
-    	Map<String,String> dic=new HashMap<String,String>();
-    	companyResp.findAll().get(1).getCompanyLocation();
-    	Float[] a=CommonUtil.geoCoding(companyResp.findAll().get(1).getCompanyLocation());
-    	dic.put(companyResp.findAll().get(1).getCompanyName(), a.toString());
-    	return dic;
-    }
-    
-    
 }
