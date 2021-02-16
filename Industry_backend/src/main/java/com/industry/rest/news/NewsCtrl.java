@@ -95,7 +95,7 @@ public class NewsCtrl {
 //			return hash;
 //			}
 //		return hash;
-	  @GetMapping("")
+	  @GetMapping("/get")
 	  public void getAllPost(){
 			String url = "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=산업기능요원";
 			Document doc = null;

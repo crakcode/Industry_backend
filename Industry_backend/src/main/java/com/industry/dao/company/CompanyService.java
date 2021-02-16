@@ -61,6 +61,12 @@ public class CompanyService {
 	}
 	
 
+	public Map<Double,Double> getGeolocation(String name) {
+		Map<Double,Double> geo=new HashMap<Double,Double>();
+		Optional<Company> company=companyResp.findByCompanyName(name);
+		geo.put(company.get().getLatitude(),company.get().getLongitude());		
+		return geo;
+	}
 	
 	public Long getCompanyId(String name) {
 		Optional<Company> company=companyResp.findByCompanyName(name);

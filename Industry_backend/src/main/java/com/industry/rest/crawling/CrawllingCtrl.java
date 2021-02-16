@@ -49,7 +49,7 @@ public class CrawllingCtrl {
 		System.out.println("hell");
 		try {
 			Document doc = Jsoup.connect("www.jobplanet.co.kr/search?query=배달의민족").get();
-			Elements divs =doc.select("span.rate_ty02");
+			Elements divs =doc.select(".rate_ty02");
 			System.out.println(divs.size());
 			System.out.println(divs.get(0));
 			return map;
@@ -88,6 +88,8 @@ public class CrawllingCtrl {
 //        		hash.put(map.get(a),divs.get(0).text());
         		//score는 doc.star에 해당하는 값들을 가져와서 비교하면됨 
         		Long score=Long.parseLong(divs.get(0).text()); 
+        		System.out.println(divs.get(0).text());
+        		System.out.println(score);
         		String key="";
         		if(score>4) {
         			key="Diamond";
@@ -139,9 +141,13 @@ public class CrawllingCtrl {
     @GetMapping("/latitude")
     public Map<String,String> getLatitude(){
     	Map<String,String> dic=new HashMap<String,String>();
-    	companyResp.findAll().get(1).getCompanyLocation();
-    	Float[] a=CommonUtil.geoCoding(companyResp.findAll().get(1).getCompanyLocation());
-    	dic.put(companyResp.findAll().get(1).getCompanyName(), a.toString());
+//    	companyResp.findAll().get(1).getCompanyLocation();
+//    	Float[] a=CommonUtil.geoCodings(companyResp.findAll().get(1).getCompanyLocation());
+//    	dic.put(companyResp.findAll().get(1).getCompanyName(), a.toString());
+    	String location = "경기도 성남시 분당구 삼평동";
+    	Float[] coords = CommonUtil.geoCodings(location);
+    	System.out.println(location + ": " + coords[0] + ", " + coords[1]);
+
     	return dic;
     }
     

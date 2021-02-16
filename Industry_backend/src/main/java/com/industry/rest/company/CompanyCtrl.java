@@ -49,6 +49,12 @@ public class CompanyCtrl {
 		return companyServ.geCompanyCountByList(list);
     }
     
+    
+    @GetMapping("/geolocation/{name}")
+    public Map<Double,Double> getGeolocation(@PathVariable String name){
+    	return companyServ.getGeolocation(name);
+    }
+    
     @GetMapping("/id/{name}")
     public Long getCompanyId(@PathVariable String name) {
         return companyServ.getCompanyId(name);

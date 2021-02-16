@@ -82,6 +82,25 @@ public class Company {
 	@Column
 	private String companyTel;
 	
+	@Column
+	private double Latitude;
+	
+	@Column
+	private double Longitude;
+
+	/**
+	 * @param latitude the latitude to set
+	 */
+	public void setLatitude(double latitude) {
+		Latitude = latitude;
+	}
+
+	/**
+	 * @param longitude the longitude to set
+	 */
+	public void setLongitude(double longitude) {
+		Longitude = longitude;
+	}
 
 	
 }
