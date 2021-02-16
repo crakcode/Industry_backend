@@ -3,9 +3,11 @@ package com.industry.rest.company;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,13 +30,29 @@ public class CompanyCtrl {
     private CompanyService companyServ;
 
     @GetMapping("/list")
-    public List<Company> getAllUsers() {
+    public List<Company> getAllCompany() {
         return companyServ.getAllCompany();
     }
     
+    @GetMapping("/page/{index}")
+    public Page<Company> getPage(@PathVariable int index) {
+        return companyServ.getPage(index);
+    }
+
     @GetMapping("/count")
     public List<Integer> getByCompanyCount() {
         return companyServ.getByCompanyCount();
+    }
+    
+    @GetMapping("/company/location")
+	public Map<String,Integer> geCompanyCountByList(@RequestBody List<String> list){
+		return companyServ.geCompanyCountByList(list);
+    }
+    
+    
+    @GetMapping("/geolocation/{name}")
+    public Map<Double,Double> getGeolocation(@PathVariable String name){
+    	return companyServ.getGeolocation(name);
     }
     
     @GetMapping("/id/{name}")
