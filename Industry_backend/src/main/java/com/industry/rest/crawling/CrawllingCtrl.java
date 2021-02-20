@@ -78,35 +78,35 @@ public class CrawllingCtrl {
             String replace = company.replaceAll("\\(주\\)", " ").replaceAll("\\(유\\)", " ");
             map.add(replace);
     	}
-    	System.out.println(map);
-    	System.out.println(map.size());
-    	System.out.println(map.get(1));
     	for(int a=0;a<10;a++) {
     		try{
     			Document doc = Jsoup.connect("https://www.teamblind.com/kr/company/"+map.get(a)).get();
         		Elements divs =doc.select(".star");
+        		
 //        		hash.put(map.get(a),divs.get(0).text());
         		//score는 doc.star에 해당하는 값들을 가져와서 비교하면됨 
-        		Long score=Long.parseLong(divs.get(0).text()); 
-        		System.out.println(divs.get(0).text());
-        		System.out.println(score);
-        		String key="";
-        		if(score>4) {
-        			key="Diamond";
-        		}else if(score >3) {
-        			key="Platinum";
-        		}else if(score>2) {
-        			key="Gold";
-        		}else if(score>1) {
-        			key="Silver";
-        		}else {
-        			key="UnRank";
-        		}
+//        		Long score=Long.parseLong(divs.get(0).text()); 
 //        		System.out.println(divs.get(0).text());
-    			hash.put(map.get(a),key);
+//        		System.out.println(score);
+//        		String key="";
+//        		if(score>4) {
+//        			key="Diamond";
+//        		}else if(score >3) {
+//        			key="Platinum";
+//        		}else if(score>2) {
+//        			key="Gold";
+//        		}else if(score>1) {
+//        			key="Silver";
+//        		}else {
+//        			key="UnRank";
+//        		}
+        		System.out.println(divs.get(0).text());
+//    			hash.put(map.get(a),key);
     		}
     		catch(Exception e) {
-    			hash.put(map.get(a),"UnRank");
+//    			hash.put(map.get(a),"UnRank");
+        		System.out.println("Exception");
+
     		}
     	}
     	return hash;
@@ -127,6 +127,25 @@ public class CrawllingCtrl {
 //		return hash;
 
 
+    @PostMapping("/desc/{companyName}")
+    public String getCompanyInfo(@PathVariable String companyName) {
+		Document doc;
+		try {
+            String replace = companyName.replaceAll("\\(주\\)", " ").replaceAll("\\(유\\)", " ");
+			doc = Jsoup.connect("https://www.teamblind.com/kr/company/"+replace).get();
+    		Elements divs =doc.select(".desc p");
+    		String text=divs.toString();
+    		String tagRemove = text.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+    		System.out.println(tagRemove);
+    		return tagRemove;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("exception");
+			return "exception";
+		}
+
+    }
     
     @GetMapping("/companys")
     public List<String> ComapyReturnName() {
