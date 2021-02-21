@@ -18,4 +18,4 @@
 TECH STACK
 > Spring boot, JPA, React js, Material UI, Jsoup
 
-<img src="![1](https://user-images.githubusercontent.com/59104583/108618500-3e8d5980-7462-11eb-9f9c-387ad87d4dc4.PNG)" width="40%" height="30%" alt="insdustry web"></img>
+![1](https://user-images.githubusercontent.com/59104583/108618539-7ac0ba00-7462-11eb-9ed0-ab1b81c2d068.PNG)
