@@ -3,6 +3,7 @@
 
 
 # 프로젝트명 산업기능요원/전문연구요원을 위한 웹사이트
+### 제작기간: 19일
 만들게된 배경: 병역특례회사의 경우 중소기업 및 20명 이하의 중소기업들이 
 
 대부분이기에 정보를 쉽게 찾을수 없었다. 그래서 병역특례를 위해 준비중인 사람들을
@@ -17,4 +18,4 @@
 TECH STACK
 > Spring boot, JPA, React js, Material UI, Jsoup
 
-<img src="/path/to/img.jpg" width="40%" height="30%" alt="insdustry web"></img>
+<img src="![1](https://user-images.githubusercontent.com/59104583/108618500-3e8d5980-7462-11eb-9f9c-387ad87d4dc4.PNG)" width="40%" height="30%" alt="insdustry web"></img>
